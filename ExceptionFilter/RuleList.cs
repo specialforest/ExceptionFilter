@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace ExceptionFilter
 {
@@ -16,8 +16,14 @@ namespace ExceptionFilter
         private const string _xmlVersion = "version";
         private const int _version = 1;
 
-        public void Deserialize(System.Xml.XmlReader reader, List<RuleFactory> factories)
+        public void Deserialize(XmlReader reader, List<RuleFactory> factories)
         {
+            Clear();
+            if (reader.IsStartElement(_xmlRootElement) && reader.IsEmptyElement)
+            {
+                return;
+            }
+
             reader.ReadStartElement(_xmlRootElement);
             List<Rule> rules = new List<Rule>();
             while (reader.IsStartElement(_xmlArrayItem))
@@ -30,12 +36,10 @@ namespace ExceptionFilter
             }
 
             reader.ReadEndElement();
-
-            Clear();
             AddRange(rules);
         }
 
-        public void Serialize(System.Xml.XmlWriter writer)
+        public void Serialize(XmlWriter writer)
         {
             writer.WriteStartElement(_xmlRootElement);
             writer.WriteAttributeString(_xmlVersion, _version.ToString());
