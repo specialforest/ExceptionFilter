@@ -20,12 +20,12 @@ namespace ExceptionFilter
             }
         }
 
-        public override ExceptionAction Handle(EnvDTE.StackFrame frame)
+        public override ExceptionAction? Handle(EnvDTE.StackFrame frame)
         {
             string testExpression = GetExpression(frame);
             if (testExpression == null)
             {
-                return ExceptionAction.Default;
+                return null;
             }
 
             if (_simpleExpression != null && _simpleExpression == testExpression)
@@ -38,7 +38,7 @@ namespace ExceptionFilter
                 return _action;
             }
 
-            return ExceptionAction.Default;
+            return null;
         }
 
         protected abstract String GetExpression(EnvDTE.StackFrame frame);

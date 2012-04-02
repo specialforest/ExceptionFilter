@@ -14,6 +14,6 @@ namespace ExceptionFilter
     /// </summary>
     public abstract class ExceptionHandler
     {
-        public abstract ExceptionAction Handle(EnvDTE.StackFrame frame);
+        public abstract ExceptionAction? Handle(EnvDTE.StackFrame frame);
     }
 }
