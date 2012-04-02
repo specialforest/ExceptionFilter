@@ -13,25 +13,72 @@ namespace ExceptionFilter
     /// </summary>
     public partial class RulesForm : Form
     {
-        private BindingList<Rule> _rulesBindings;
-        private List<RuleFactory> _ruleFactories;
-        private int _lastSelectedItem;
+        private RuleList rules;
+        private List<RuleFactory> ruleFactories;
+        private int lastSelectedItemIndex;
 
         public RulesForm(RuleList rules, List<RuleFactory> ruleFactories)
         {
             InitializeComponent();
 
-            _rulesBindings = new BindingList<Rule>(rules);
-            lbRules.DataSource = _rulesBindings;
-            lbRules.DisplayMember = "Name";
-            _lastSelectedItem = -1;
+            this.rules = rules;
+            this.lastSelectedItemIndex = -1;
+            PopulateList();
 
-            _ruleFactories = ruleFactories;
-            cbRuleType.DataSource = _ruleFactories;
+            this.ruleFactories = ruleFactories;
+            cbRuleType.DataSource = this.ruleFactories;
             cbRuleType.DisplayMember = "Description";
+            
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
+        private void UpdateRules()
+        {
+            this.rules.Clear();
+            foreach (ListViewItem item in this.listView1.Items)
+            {
+                this.rules.Add((Rule)item.Tag);
+            }
+        }
+
+        private void PopulateList()
+        {
+            this.listView1.BeginUpdate();
+            this.listView1.Items.Clear();
+            foreach (Rule rule in this.rules)
+            {
+                this.listView1.Items.Add(CreateItem(rule));
+            }
+
+            this.listView1.EndUpdate();
+        }
+
+        private ListViewItem CreateItem(Rule rule)
+        {
+            ListViewItem item = new ListViewItem();
+            item.SubItems.Add(new ListViewItem.ListViewSubItem());
+            item.SubItems.Add(new ListViewItem.ListViewSubItem());
+            item.Tag = rule;
+            UpdateItem(item);
+            return item;
+        }
+
+        private void UpdateItem(ListViewItem item)
+        {
+            Rule rule = (Rule)item.Tag;
+            item.SubItems[0].Text = rule.Name;
+            item.SubItems[1].Text = rule.Description;
+        }
+
+        private void MoveItem(int from, int to)
+        {
+            ListViewItem item = this.listView1.Items[from];
+            this.listView1.BeginUpdate();
+            this.listView1.Items.RemoveAt(from);
+            this.listView1.Items.Insert(to, item);
+            this.listView1.EndUpdate();
+        }
+
+        private void OnNewRule(object sender, EventArgs e)
         {
             RuleFactory factory = (RuleFactory)cbRuleType.SelectedItem;
             if (factory == null)
@@ -42,16 +89,24 @@ namespace ExceptionFilter
             Rule rule = factory.Create();
             rule.Data.Name = "New Rule";
             rule.Data.Action = ExceptionAction.Continue;
-            _rulesBindings.Add(rule);
 
-            lbRules.SelectedIndex = _rulesBindings.Count - 1;
+            ListViewItem newItem = CreateItem(rule);
+            this.listView1.Items.Insert(this.lastSelectedItemIndex + 1, newItem);
+            newItem.Selected = true;
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void OnRuleSelected(object sender, EventArgs e)
         {
-            Rule selectedRule = (Rule)lbRules.SelectedItem;
-            if (lbRules.SelectedItem != null)
+            int newSelectedItemIndex = this.listView1.SelectedIndices.Count > 0 ? this.listView1.SelectedIndices[0] : -1;
+            if (this.lastSelectedItemIndex >= 0 && this.lastSelectedItemIndex != newSelectedItemIndex)
             {
+                UpdateItem(this.listView1.Items[this.lastSelectedItemIndex]);
+            }
+
+            this.lastSelectedItemIndex = newSelectedItemIndex;
+            if (newSelectedItemIndex >= 0)
+            {
+                Rule selectedRule = (Rule)this.listView1.SelectedItems[0].Tag;
                 pgRuleProps.SelectedObject = selectedRule.Data;
                 tbRuleDesc.Text = selectedRule.Description;
             }
@@ -60,50 +115,54 @@ namespace ExceptionFilter
                 pgRuleProps.SelectedObject = null;
                 tbRuleDesc.Clear();
             }
-
-            int newSelectedItem = lbRules.SelectedIndex;
-            if (_lastSelectedItem >= 0 && _lastSelectedItem != newSelectedItem)
-            {
-                _rulesBindings.ResetItem(_lastSelectedItem);
-            }
-
-            _lastSelectedItem = newSelectedItem;
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void OnRuleRemove(object sender, EventArgs e)
         {
-            int index = lbRules.SelectedIndex;
-            if (index < 0)
+            if (this.listView1.SelectedIndices.Count > 0)
+            {
+                int selectedIndex = this.listView1.SelectedIndices[0];
+                this.listView1.SelectedItems[0].Remove();
+                if (this.listView1.Items.Count > 0)
+                {
+                    this.listView1.Items[selectedIndex > 0 ? selectedIndex - 1 : selectedIndex].Selected = true;
+                }
+            }
+        }
+
+        private void OnRuleMoveUp(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            _rulesBindings.RemoveAt(index);
-            if (_rulesBindings.Count > 0)
+            int selectedIndex = this.listView1.SelectedIndices[0];
+            if (selectedIndex > 0)
             {
-                lbRules.SelectedIndex = (index > 0) ? (index - 1) : index;
+                MoveItem(selectedIndex - 1, selectedIndex);
             }
         }
 
-        private void btnUp_Click(object sender, EventArgs e)
+        private void OnRuleMoveDown(object sender, EventArgs e)
         {
-            int index = lbRules.SelectedIndex;
-            if (index > 0)
+            if (this.listView1.SelectedIndices.Count == 0)
             {
-                Rule previousItem = _rulesBindings[index - 1];
-                _rulesBindings.RemoveAt(index - 1);
-                _rulesBindings.Insert(index, previousItem);
+                return;
+            }
+
+            int selectedIndex = this.listView1.SelectedIndices[0];
+            if (selectedIndex >= 0 && selectedIndex < this.listView1.Items.Count - 1)
+            {
+                MoveItem(selectedIndex + 1, selectedIndex);
             }
         }
 
-        private void btnDown_Click(object sender, EventArgs e)
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
-            int index = lbRules.SelectedIndex;
-            if (index >= 0 && index < _rulesBindings.Count - 1)
+            if (this.DialogResult == DialogResult.OK)
             {
-                Rule nextItem = _rulesBindings[index + 1];
-                _rulesBindings.RemoveAt(index + 1);
-                _rulesBindings.Insert(index, nextItem);
+                UpdateRules();
             }
         }
     }

@@ -35,11 +35,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbRuleDesc = new System.Windows.Forms.TextBox();
             this.pgRuleProps = new System.Windows.Forms.PropertyGrid();
-            this.lbRules = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.cbRuleType = new System.Windows.Forms.ComboBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +55,7 @@
             this.btnDown.Size = new System.Drawing.Size(32, 32);
             this.btnDown.TabIndex = 4;
             this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            this.btnDown.Click += new System.EventHandler(this.OnRuleMoveDown);
             // 
             // btnUp
             // 
@@ -64,7 +66,7 @@
             this.btnUp.Size = new System.Drawing.Size(32, 32);
             this.btnUp.TabIndex = 3;
             this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            this.btnUp.Click += new System.EventHandler(this.OnRuleMoveUp);
             // 
             // btnOK
             // 
@@ -94,12 +96,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.Controls.Add(this.tbRuleDesc, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pgRuleProps, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lbRules, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
@@ -113,10 +115,10 @@
             // 
             this.tbRuleDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRuleDesc.Location = new System.Drawing.Point(272, 3);
+            this.tbRuleDesc.Location = new System.Drawing.Point(406, 3);
             this.tbRuleDesc.Name = "tbRuleDesc";
             this.tbRuleDesc.ReadOnly = true;
-            this.tbRuleDesc.Size = new System.Drawing.Size(398, 20);
+            this.tbRuleDesc.Size = new System.Drawing.Size(264, 20);
             this.tbRuleDesc.TabIndex = 2;
             // 
             // pgRuleProps
@@ -124,23 +126,10 @@
             this.pgRuleProps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pgRuleProps.Location = new System.Drawing.Point(272, 29);
+            this.pgRuleProps.Location = new System.Drawing.Point(406, 29);
             this.pgRuleProps.Name = "pgRuleProps";
-            this.pgRuleProps.Size = new System.Drawing.Size(398, 434);
+            this.pgRuleProps.Size = new System.Drawing.Size(264, 434);
             this.pgRuleProps.TabIndex = 0;
-            // 
-            // lbRules
-            // 
-            this.lbRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbRules.FormattingEnabled = true;
-            this.lbRules.Location = new System.Drawing.Point(3, 3);
-            this.lbRules.Name = "lbRules";
-            this.tableLayoutPanel1.SetRowSpan(this.lbRules, 2);
-            this.lbRules.Size = new System.Drawing.Size(263, 459);
-            this.lbRules.TabIndex = 0;
-            this.lbRules.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -168,7 +157,7 @@
             this.btnRemove.Size = new System.Drawing.Size(32, 32);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnRemove.Click += new System.EventHandler(this.OnRuleRemove);
             // 
             // btnNew
             // 
@@ -179,7 +168,7 @@
             this.btnNew.Size = new System.Drawing.Size(32, 32);
             this.btnNew.TabIndex = 0;
             this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.Click += new System.EventHandler(this.OnNewRule);
             // 
             // cbRuleType
             // 
@@ -190,6 +179,37 @@
             this.cbRuleType.Name = "cbRuleType";
             this.cbRuleType.Size = new System.Drawing.Size(263, 21);
             this.cbRuleType.TabIndex = 2;
+            // 
+            // listView1
+            // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.FullRowSelect = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.tableLayoutPanel1.SetRowSpan(this.listView1, 2);
+            this.listView1.Size = new System.Drawing.Size(397, 460);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.OnRuleSelected);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 265;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Type";
+            this.columnHeader2.Width = 128;
             // 
             // RulesForm
             // 
@@ -202,6 +222,7 @@
             this.MinimizeBox = false;
             this.Name = "RulesForm";
             this.Text = "Rules";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -211,7 +232,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbRules;
         private System.Windows.Forms.PropertyGrid pgRuleProps;
         private System.Windows.Forms.ComboBox cbRuleType;
         private System.Windows.Forms.TextBox tbRuleDesc;
@@ -223,6 +243,9 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 
