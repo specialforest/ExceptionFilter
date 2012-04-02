@@ -7,8 +7,8 @@ using System.ComponentModel;
 
 namespace ExceptionFilter
 {
-    [Description("By Function Filter")]
-    [RuleType("ByFuncFilter")]
+    [Description("Routine Filter")]
+    [RuleType("FuncFilter")]
     public class ByFuncRule : Rule
     {
         private ExpressionRuleData _data;

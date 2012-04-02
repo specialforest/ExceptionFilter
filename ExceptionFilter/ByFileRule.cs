@@ -8,8 +8,8 @@ using System.ComponentModel;
 
 namespace ExceptionFilter
 {
-    [Description("By File Filter")]
-    [RuleType("ByFileFilter")]
+    [Description("Source Filter")]
+    [RuleType("SourceFilter")]
     public class ByFileRule : Rule
     {
         private ExpressionRuleData _data;
