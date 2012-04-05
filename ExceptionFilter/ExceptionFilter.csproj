@@ -58,6 +58,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BasicExceptionHandler.cs" />
+    <Compile Include="ByModuleRule.cs" />
     <Compile Include="Rule.cs" />
     <Compile Include="ExpressionRule.cs" />
     <Compile Include="SimpleRuleFactory.cs" />
@@ -129,9 +130,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\Documents\Visual Studio 2010\Addins\ExceptionFilter_Test.AddIn">
-      <Link>ExceptionFilter_Test.AddIn</Link>
-    </Content>
     <Content Include="ExceptionFilter.AddIn" />
     <None Include="Resources\up.png" />
     <None Include="Resources\down.png" />
