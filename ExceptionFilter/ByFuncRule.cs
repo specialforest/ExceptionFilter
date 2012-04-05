@@ -33,6 +33,7 @@ namespace ExceptionFilter
             return new ByFuncExceptionHandler(_data);
         }
     }
+
     public class ByFuncExceptionHandler : BasicExceptionHandler
     {
         public ByFuncExceptionHandler(ExpressionRuleData data)
