@@ -100,13 +100,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9648B0D22B80493F92169A124CE472E5"
+        "OwnerKey" = "8:_7DB6DD6B9D9BBF2F740EF14F133D5E12"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_736CCD66FA1F4C449ADD0A7C3253596C"
+        "OwnerKey" = "8:_3C05B9F6F9B3D7146F3691885A858C79"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,13 +118,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7DB6DD6B9D9BBF2F740EF14F133D5E12"
+        "OwnerKey" = "8:_9648B0D22B80493F92169A124CE472E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3C05B9F6F9B3D7146F3691885A858C79"
+        "OwnerKey" = "8:_736CCD66FA1F4C449ADD0A7C3253596C"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -135,7 +135,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:bin\\Debug\\Setup.msi"
+        "OutputFilename" = "8:bin\\Debug\\ExceptionFilter.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -172,7 +172,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:bin\\Release\\Setup.msi"
+        "OutputFilename" = "8:bin\\Release\\ExceptionFilter.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -499,7 +499,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExceptionFilter Add-in"
         "ProductCode" = "8:{AAC13CEA-5555-4E16-BC57-D23E6D988657}"
-        "PackageCode" = "8:{2B6A58D3-9801-40F2-8B6E-FA1C6113DF38}"
+        "PackageCode" = "8:{09B30408-E505-4464-BC2C-F38C0A3D3D54}"
         "UpgradeCode" = "8:{6C6809B1-740C-45A7-B829-C1583F3CC77F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
