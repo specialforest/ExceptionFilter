@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionFilter", "ExceptionFilter\ExceptionFilter.csproj", "{53A82185-34E4-4492-BC62-DDD127CD27A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionFilter_VS2008", "ExceptionFilter\ExceptionFilter_VS2008.csproj", "{53A82185-34E4-4492-BC62-DDD127CD27A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "TestForm\TestForm.csproj", "{29032D68-2817-48F0-A45E-8C05EEE56A0E}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{38BFF31D-33AA-41F9-9B79-73C4368E70B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupCustomAction", "Setup\CustomAction\SetupCustomAction.csproj", "{6D07A20D-ABBC-43BE-AD5F-5263CDEC9EED}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_VS2008", "Setup\Setup_VS2008.vdproj", "{D8972BAC-2265-4EDA-B69E-6785E5ADC950}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,12 +20,10 @@ Global
 		{29032D68-2817-48F0-A45E-8C05EEE56A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29032D68-2817-48F0-A45E-8C05EEE56A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29032D68-2817-48F0-A45E-8C05EEE56A0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38BFF31D-33AA-41F9-9B79-73C4368E70B1}.Debug|Any CPU.ActiveCfg = Debug
-		{38BFF31D-33AA-41F9-9B79-73C4368E70B1}.Release|Any CPU.ActiveCfg = Release
-		{38BFF31D-33AA-41F9-9B79-73C4368E70B1}.Release|Any CPU.Build.0 = Release
-		{6D07A20D-ABBC-43BE-AD5F-5263CDEC9EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D07A20D-ABBC-43BE-AD5F-5263CDEC9EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D07A20D-ABBC-43BE-AD5F-5263CDEC9EED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8972BAC-2265-4EDA-B69E-6785E5ADC950}.Debug|Any CPU.ActiveCfg = Debug
+		{D8972BAC-2265-4EDA-B69E-6785E5ADC950}.Debug|Any CPU.Build.0 = Debug
+		{D8972BAC-2265-4EDA-B69E-6785E5ADC950}.Release|Any CPU.ActiveCfg = Release
+		{D8972BAC-2265-4EDA-B69E-6785E5ADC950}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

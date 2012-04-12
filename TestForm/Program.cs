@@ -20,6 +20,7 @@ namespace ExceptionFilter
             List<RuleFactory> ruleFactories = new List<RuleFactory>();
             ruleFactories.Add(new SimpleRuleFactory(typeof(ByFileRule), typeof(ExpressionRuleData)));
             ruleFactories.Add(new SimpleRuleFactory(typeof(ByFuncRule), typeof(ExpressionRuleData)));
+            ruleFactories.Add(new SimpleRuleFactory(typeof(ByModuleRule), typeof(ModuleRuleData)));
             Application.Run(new RulesForm(rules, ruleFactories));
         }
     }

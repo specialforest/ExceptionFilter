@@ -47,53 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ExceptionFilter\BasicExceptionHandler.cs">
-      <Link>BasicExceptionHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\ByFileRule.cs">
-      <Link>ByFileRule.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\ByFuncRule.cs">
-      <Link>ByFuncRule.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\ExceptionHandler.cs">
-      <Link>ExceptionHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\ExpressionRule.cs">
-      <Link>ExpressionRule.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\Properties\Resources.Designer.cs">
-      <Link>Properties\Resources.Designer.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\Rule.cs">
-      <Link>Rule.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\RuleFactory.cs">
-      <Link>RuleFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\RuleList.cs">
-      <Link>RuleList.cs</Link>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\RulesForm.cs">
-      <Link>RulesForm.cs</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\RulesForm.designer.cs">
-      <Link>RulesForm.designer.cs</Link>
-      <DependentUpon>RulesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="..\ExceptionFilter\SimpleRuleFactory.cs">
-      <Link>SimpleRuleFactory.cs</Link>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="..\ExceptionFilter\Properties\Resources.resx">
-      <Link>Properties\Resources.resx</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\ExceptionFilter\RulesForm.resx">
-      <Link>RulesForm.resx</Link>
-      <DependentUpon>RulesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,6 +58,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExceptionFilter\ExceptionFilter_VS2008.csproj">
+      <Project>{53A82185-34E4-4492-BC62-DDD127CD27A1}</Project>
+      <Name>ExceptionFilter_VS2008</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
